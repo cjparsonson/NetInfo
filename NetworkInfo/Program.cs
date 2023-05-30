@@ -15,7 +15,8 @@ foreach (NetworkInterface adapter in interfaces)
     if (adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet || adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && adapter.OperationalStatus == OperationalStatus.Up)
     {
         IPv4InterfaceProperties IPv4 = properties.GetIPv4Properties();
-        WriteLine($"Name: {adapter.Description} \nIP: {properties.UnicastAddresses[1].Address} \nType: {adapter.NetworkInterfaceType} \nStatus: {adapter.OperationalStatus}"); // UnicastAddresses[0] gets IPv6 [1] gets IPv4
+        WriteLine($"Name: {adapter.Description} \nIP: {properties.UnicastAddresses[1].Address}" +
+            $" \nType: {adapter.NetworkInterfaceType} \nStatus: {adapter.OperationalStatus} \n DNS: {properties.DnsAddresses[0].ToString()}"); // UnicastAddresses[0] gets IPv6 [1] gets IPv4
         WriteLine();
     }
     
