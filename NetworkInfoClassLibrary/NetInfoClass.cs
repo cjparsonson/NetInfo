@@ -13,12 +13,12 @@ public class NetInfoClass
     public static readonly string hostname = Dns.GetHostName();
         
     // Get all local NICs
-    public readonly NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+    public static readonly NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
 
     // Get current DNS entries for the local machine
     public readonly IPAddress[] dnsAddresses = Dns.GetHostAddresses(hostname);
 
-    public List<string> GetIPv4Addreses() 
+    internal List<string> GetIPv4Addreses() 
     {
         List<string> IPv4Addresses = new List<string>();
         foreach (NetworkInterface iface in interfaces)
@@ -32,7 +32,7 @@ public class NetInfoClass
         return IPv4Addresses;
     }
 
-    public List<string> GetDNSServers()
+    internal List<string> GetDNSServers()
     {
         List<string> dnsServers = new List<string>();
         foreach(NetworkInterface iface in interfaces)
