@@ -18,7 +18,7 @@ public class NetInfoClass
     // Get current DNS entries for the local machine
     public readonly IPAddress[] dnsAddresses = Dns.GetHostAddresses(hostname);
 
-    internal List<string> GetIPv4Addreses() 
+    public List<string> GetIPv4Addreses() 
     {
         List<string> IPv4Addresses = new List<string>();
         foreach (NetworkInterface iface in interfaces)
@@ -32,7 +32,7 @@ public class NetInfoClass
         return IPv4Addresses;
     }
 
-    internal List<string> GetDNSServers()
+    public List<string> GetDNSServers()
     {
         List<string> dnsServers = new List<string>();
         foreach(NetworkInterface iface in interfaces)
