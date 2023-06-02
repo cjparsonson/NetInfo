@@ -41,6 +41,11 @@ namespace NetworkInfoApp
             {
                 dnsServerAddresses.Items.Add(dnsServer);
             }
+            List<string> dnsList = localInfo.DNSEntryList;
+            foreach (string dnsEntry in dnsList)
+            {
+                dnsEntries.Items.Add(dnsEntry);
+            }
             
         }
 

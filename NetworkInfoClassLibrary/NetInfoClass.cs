@@ -43,7 +43,7 @@ public class NetInfoClass
 
     private List<string> GetDNSServers()
     {
-        List<string> dnsServers = new List<string>();
+        List<string> dnsServers = new();
         foreach(NetworkInterface iface in interfaces)
         {
             if (iface.NetworkInterfaceType == NetworkInterfaceType.Ethernet || iface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
@@ -63,10 +63,25 @@ public class NetInfoClass
        // Remove duplicates
        return dnsServers.Distinct().ToList();
     }
+
+    private List<string> GetDNSEntries()
+    {
+        List<string> dnsEntries = new List<string>();
+        foreach (IPAddress dns in dnsAddresses)
+        {
+            if (dns.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            {
+                dnsEntries.Add(dns.ToString());
+            }
+            
+        }
+        return dnsEntries.Distinct().ToList();
+    }
     
     // Properties
     public List<string> Ipv4List => GetIPv4Addreses();
     public List<string> DNSServerList => GetDNSServers();
+    public List<string> DNSEntryList => GetDNSEntries();
     
 }
 
