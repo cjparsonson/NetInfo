@@ -2,6 +2,7 @@
 using System.Data.Common;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography.X509Certificates;
 
 
 // Namespace and Class definitions
@@ -9,16 +10,24 @@ namespace NetworkInfo.Shared;
 
 public class NetInfoClass
 {
-    // Get local machine hostname
-    public static readonly string hostname = Dns.GetHostName();
-        
-    // Get all local NICs
-    public static readonly NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+    // local machine hostname field
+    public readonly string hostname; 
 
-    // Get current DNS entries for the local machine
-    public readonly IPAddress[] dnsAddresses = Dns.GetHostAddresses(hostname);
+    // all local NICs field
+    public readonly NetworkInterface[] interfaces; 
 
-    public List<string> GetIPv4Addreses() 
+    // current DNS entries for the local machine field
+    public readonly IPAddress[] dnsAddresses; 
+
+    // Constructors
+    public NetInfoClass()
+    {
+        hostname = Dns.GetHostName();
+        interfaces = NetworkInterface.GetAllNetworkInterfaces();
+        dnsAddresses = Dns.GetHostAddresses(hostname);
+    }
+
+    private List<string> GetIPv4Addreses() 
     {
         List<string> IPv4Addresses = new List<string>();
         foreach (NetworkInterface iface in interfaces)
@@ -32,7 +41,7 @@ public class NetInfoClass
         return IPv4Addresses;
     }
 
-    public List<string> GetDNSServers()
+    private List<string> GetDNSServers()
     {
         List<string> dnsServers = new List<string>();
         foreach(NetworkInterface iface in interfaces)
@@ -54,6 +63,11 @@ public class NetInfoClass
        // Remove duplicates
        return dnsServers.Distinct().ToList();
     }
+    
+    // Properties
+    public List<string> Ipv4List => GetIPv4Addreses();
+    public List<string> DNSServerList => GetDNSServers();
+    
 }
 
     

@@ -30,12 +30,12 @@ namespace NetworkInfoApp
         private void ButtonPopulate_Click(object sender, RoutedEventArgs e)
         {
             NetInfoClass localInfo = new();
-            List<string> ipv4 = localInfo.GetIPv4Addreses();
+            List<string> ipv4 = localInfo.Ipv4List;
             foreach (string address in ipv4)
             {
                 ipv4Addresses.Items.Add(address);
             }
-            List<string> dnsServers = localInfo.GetDNSServers();
+            List<string> dnsServers = localInfo.DNSServerList;
             foreach (string dnsServer in dnsServers)
             {
                 dnsServerAddresses.Items.Add(dnsServer);
