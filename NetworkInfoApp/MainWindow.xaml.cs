@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NetworkInfo.Shared;
+using System.Diagnostics;
 
 namespace NetworkInfoApp
 {
@@ -41,6 +42,16 @@ namespace NetworkInfoApp
                 dnsServerAddresses.Items.Add(dnsServer);
             }
             
+        }
+
+        private void ButtonPwsh_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessStartInfo process = new()
+            {
+                FileName = "powershell.exe",
+                UseShellExecute = false,
+            };
+            Process.Start(process);
         }
     }
 }
